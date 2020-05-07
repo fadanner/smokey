@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include "src/esp8266-oled-ssd1306/src/SSD1306.h"
 #include "src/esp8266-oled-ssd1306/src/OLEDDisplayUi.h"
+#include <MAX31855.h> // Include MAX31855 Sensor library
 
 
 SSD1306 display (0x3c, 5, 4);
@@ -57,9 +58,12 @@ class Fan{
 
 class TempSensor{
   private:
-    long _value;
+    long _probeTemp = 0;
+    long _ambientTemp = 0;
     String _name;
     byte _pin;
+    byte _fault;
+    MAX31855_Class MAX31855; ///< Create an instance of MAX31855
   public:
     TempSensor(char* name,byte pin){
       _name = name;
@@ -68,19 +72,27 @@ class TempSensor{
     }
 
     void init(){
-      //init the tempSensor
+      while (!MAX31855.begin(_pin));
     }
 
-    long getCurrentValue(){
-      return _value; 
+    long getProbeTemperature(){
+        _probeTemp = MAX31855.readProbe();   // retrieve thermocouple probe temp
+        uint8_t faultCode          = MAX31855.fault(); 
+      return _probeTemp; 
+    }
+
+    long getAmbientTemperature(){
+      _ambientTemp = MAX31855.readAmbient(); // retrieve MAX31855 die ambient temperature
+      return _ambientTemp; 
+    }
+
+    byte getFault(){
+      _fault = MAX31855.fault(); // retrieve MAX31855 die ambient temperature
+      return _fault;   
     }
 
     String getName(){
       return _name;
-    }
-
-    void measure(){
-      _value = random(0, 450);
     }
 };
 
@@ -92,18 +104,24 @@ class TempSensor{
 const char* ssid     = "FaMe_Guest";
 const char* password = "fame_gast";
 
-const int sensorCount = 5;
+const int sensorCount = 1;
 TempSensor sensors[sensorCount] = {
-  TempSensor("Sensor0",15),
-  TempSensor("Sensor1",15),
-  TempSensor("Sensor2",15),
-  TempSensor("Sensor3",15),
-  TempSensor("Sensor4",15)
+  TempSensor("Sensor0",21)
 };
 
-const int fanPwmPin = 0;
-const int fanSwitchPin = 2;
+const byte fanPwmPin = 0;
+const byte fanSwitchPin = 2;
 Fan fan = Fan("Fan",0,2);
+
+const byte buttonLeftPin = 16 ;
+const byte buttonRightPin = 17;
+
+const uint8_t  SPI_CHIP_SELECT  =      21; ///< Chip-Select PIN for SPI
+const uint8_t  SPI_MISO         =   MISO; ///< Master-In, Slave-Out PIN for SPI
+const uint8_t  SPI_SYSTEM_CLOCK =    SCK; ///< System Clock PIN for SPI
+
+
+
 
 
 void controllerInfos(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
@@ -126,7 +144,7 @@ void sensorInfos(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int
   display->setFont(ArialMT_Plain_10);
   for(int i = 0; i < sensorCount; i++){
     display->drawString(0+x,10*i+y, sensors[i].getName());
-    display->drawString(60+x, 10*i +y, String(sensors[i].getCurrentValue())); 
+    display->drawString(60+x, 10*i +y, String(sensors[i].getAmbientTemperature())); 
   }
 }
 
@@ -152,15 +170,42 @@ OverlayCallback overlays[] = { msOverlay };
 int overlaysCount = 1;
 /////////////////////////////////////////////////////
 
+void IRAM_ATTR buttonLeftPressed() {
+  ui.previousFrame();
+}
+
+void IRAM_ATTR buttonRightPressed() {
+  ui.nextFrame();
+}
+
+
+
+
+
+
 void setup() {
+  pinMode(buttonLeftPin, INPUT_PULLUP);
+  pinMode(buttonRightPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(buttonLeftPin), buttonLeftPressed, FALLING);
+  attachInterrupt(digitalPinToInterrupt(buttonRightPin), buttonRightPressed, FALLING);
+  
+
+  
   Serial.begin(115200);
   Serial.setDebugOutput(true);
   Serial.print("ESP32 SDK: ");
   Serial.println(ESP.getSdkVersion());
+
+
+  Serial.println(MOSI); //23
+  Serial.println(MISO); //19
+  Serial.println(SCK); //18
+  Serial.println(SS); //5
   ui.setTargetFPS(30);
   ui.setFrameAnimation(SLIDE_LEFT);
   ui.setFrames(frames, frameCount);
-  ui.setTimePerFrame(5*1000);
+  //ui.setTimePerFrame(5*1000);
+  ui.disableAutoTransition();
   ui.init();
   fan.init();
    WiFi.begin(ssid, password);
@@ -177,15 +222,11 @@ void setup() {
 }
 
 void loop() {
-  for(int i = 0; i < sensorCount; i++){
-    sensors[i].measure();
-  }
     if(Serial.available() > 0){
       byte currentSpeed = (String(Serial.readStringUntil('\n'))).toInt();
       fan.setSpeed(currentSpeed);
       Serial.println(currentSpeed);
     }
-
   ui.update();
   delay(10);
 
