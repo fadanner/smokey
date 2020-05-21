@@ -1,3 +1,4 @@
+#line 1 "e:\\code\\smokey\\smokey\\smokey.ino"
 #include "Arduino.h"
 #include "Wire.h"
 #include "WiFi.h"
@@ -48,6 +49,11 @@ ScreenFrame sfAir;
 /////////////////////////////////////////////////////
 
 
+#line 51 "e:\\code\\smokey\\smokey\\smokey.ino"
+void setup();
+#line 89 "e:\\code\\smokey\\smokey\\smokey.ino"
+void loop();
+#line 51 "e:\\code\\smokey\\smokey\\smokey.ino"
 void setup() {
 
   
@@ -97,3 +103,4 @@ void loop() {
   delay(10);
 
 }
+

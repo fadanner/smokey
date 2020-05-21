@@ -1,22 +1,23 @@
-#include "Arduino.h"
-#include "Wire.h"
-#include "WiFi.h"
-#include "src/esp8266-oled-ssd1306/src/SSD1306.h"
-#include "src/esp8266-oled-ssd1306/src/OLEDDisplayUi.h"
+# 1 "e:\\code\\smokey\\smokey\\smokey.ino"
+# 2 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 3 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 4 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 5 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 6 "e:\\code\\smokey\\smokey\\smokey.ino" 2
 
 
-#include "src/smokey/Device.h"
-#include "src/smokey/TempSensor.h"
-#include "src/smokey/Fan.h"
-#include "src/smokey/ScreenController.h"
-#include "src/smokey/ScreenFrame.h"
-#include "src/smokey/ScreenLine.h"
+# 9 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 10 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 11 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 12 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 13 "e:\\code\\smokey\\smokey\\smokey.ino" 2
+# 14 "e:\\code\\smokey\\smokey\\smokey.ino" 2
 
 SSD1306 display (0x3c, 5, 4);
-OLEDDisplayUi ui     ( &display );
+OLEDDisplayUi ui ( &display );
 
 
-const char* ssid     = "FaMe_Guest";
+const char* ssid = "FaMe_Guest";
 const char* password = "fame_gast";
 
 const int sensorCount = 1;
@@ -34,9 +35,9 @@ const byte buttonUpPin = 17;
 const byte buttonDownPin = 17;
 const byte buttonSelectPin = 17;
 
-const uint8_t  SPI_CHIP_SELECT  =      21; ///< Chip-Select PIN for SPI
-const uint8_t  SPI_MISO         =   MISO; ///< Master-In, Slave-Out PIN for SPI
-const uint8_t  SPI_SYSTEM_CLOCK =    SCK; ///< System Clock PIN for SPI
+const uint8_t SPI_CHIP_SELECT = 21; ///< Chip-Select PIN for SPI
+const uint8_t SPI_MISO = MISO; ///< Master-In, Slave-Out PIN for SPI
+const uint8_t SPI_SYSTEM_CLOCK = SCK; ///< System Clock PIN for SPI
 
 ScreenController screenController;
 ScreenFrame sfController;
@@ -50,7 +51,7 @@ ScreenFrame sfAir;
 
 void setup() {
 
-  
+
   Serial.begin(115200);
   Serial.setDebugOutput(true);
   Serial.print("ESP32 SDK: ");
@@ -70,9 +71,9 @@ void setup() {
   sfAir = ScreenFrame(display);
   sfAir.setScreenLine(new ScreenLine(fan)
   screenController.SetFrame(sfTemp;1)
- 
+
   screenController.updateScreen();
-  
+
    WiFi.begin(ssid, password);
    while (WiFi.status() != WL_CONNECTED) {
           delay(500);
@@ -82,7 +83,7 @@ void setup() {
     Serial.println("WiFi connected");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
-  
+
 
 }
 
