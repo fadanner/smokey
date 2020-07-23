@@ -1,6 +1,7 @@
 #ifndef SMOKEY_Device_H
 #define SMOKEY_Device_H
 
+
 #include <Arduino.h>
 
 class Device

@@ -2,7 +2,7 @@
 #define SMOKEY_TEMPSENSOR_H
 
 #include <Arduino.h>
-#include "MAX31855.h" // Include MAX31855 Sensor library
+#include <MAX31855.h> // Include MAX31855 Sensor library
 #include "Device.h"
 
 class TempSensor : public Device{
@@ -11,7 +11,7 @@ class TempSensor : public Device{
     int _ambientTemp = 0;
     byte _pin;
     byte _fault;
-    MAX31855_Class MAX31855; ///< Create an instance of MAX31855
+    MAX31855_Class Sensor; ///< Create an instance of MAX31855
   public:
     TempSensor(char* name,byte pin) ;
 
@@ -22,6 +22,8 @@ class TempSensor : public Device{
     int getAmbientTemperature();
 
     int getValue();
+
+    String getString();
 
     byte getFault();
 };

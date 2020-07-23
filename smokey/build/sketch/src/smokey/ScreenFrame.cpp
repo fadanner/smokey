@@ -1,6 +1,6 @@
 #include "ScreenFrame.h"
 
-ScreenFrame::ScreenFrame(SSD1306 display)
+ScreenFrame::ScreenFrame(SSD1306& display)
 {
     _display = display;
 };

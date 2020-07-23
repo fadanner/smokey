@@ -10,7 +10,7 @@ private:
   Device _device;
 
 public:
-    ScreenLine(Device device);
+    ScreenLine(Device& device);
     String getColumn1String();
     String getColumn2String();
     void setValue(byte value);

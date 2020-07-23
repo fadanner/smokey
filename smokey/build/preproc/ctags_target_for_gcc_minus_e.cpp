@@ -17,7 +17,7 @@ SSD1306 display (0x3c, 5, 4);
 OLEDDisplayUi ui ( &display );
 
 
-const char* ssid = "FaMe_Guest";
+char* ssid = "FaMe_Guest";
 const char* password = "fame_gast";
 
 const int sensorCount = 1;
@@ -39,10 +39,10 @@ const uint8_t SPI_CHIP_SELECT = 21; ///< Chip-Select PIN for SPI
 const uint8_t SPI_MISO = MISO; ///< Master-In, Slave-Out PIN for SPI
 const uint8_t SPI_SYSTEM_CLOCK = SCK; ///< System Clock PIN for SPI
 
-ScreenController screenController;
-ScreenFrame sfController;
-ScreenFrame sfTemp;
-ScreenFrame sfAir;
+ScreenController screenController = ScreenController(display, buttonLeftPin, buttonRightPin, buttonUpPin, buttonDownPin, buttonSelectPin);
+ScreenFrame sfController = ScreenFrame(display);
+ScreenFrame sfTemp = ScreenFrame(display);
+ScreenFrame sfAir = ScreenFrame(display);
 
 
 
@@ -63,14 +63,12 @@ void setup() {
   Serial.println(SCK); //18
   Serial.println(SS); //5
 
-  screenController = ScreenController(display, buttonLeftPin, buttonRightPin, buttonUpPin, buttonDownPin, buttonSelectPin);
-  sfTemp = ScreenFrame(display);
-  sfTemp.setScreenLine(new ScreenLine(sensors[0])
-  screenController.SetFrame(sfTemp;0)
-
-  sfAir = ScreenFrame(display);
-  sfAir.setScreenLine(new ScreenLine(fan)
-  screenController.SetFrame(sfTemp;1)
+  ScreenLine slSensor0 = ScreenLine(sensors[0]);
+  sfTemp.setScreenLine(slSensor0,0);
+  screenController.SetFrame(sfTemp,0);
+  ScreenLine slFan = ScreenLine(fan);
+  sfAir.setScreenLine(slFan,0);
+  screenController.SetFrame(sfTemp,1);
 
   screenController.updateScreen();
 
@@ -90,7 +88,7 @@ void setup() {
 void loop() {
     if(Serial.available() > 0){
       byte currentSpeed = (String(Serial.readStringUntil('\n'))).toInt();
-      fan.setSpeed(currentSpeed);
+      fan.setValue(currentSpeed);
       Serial.println(currentSpeed);
     }
   screenController.watchButtonPress();

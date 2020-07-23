@@ -1,6 +1,6 @@
 #include "ScreenLine.h"
 
-ScreenLine::ScreenLine(Device device){
+ScreenLine::ScreenLine():_device(device){
     _device = device;
 }
 

@@ -1,30 +1,31 @@
 #include "ScreenFrame.h"
 
-ScreenFrame::ScreenFrame(SSD1306 display)
-{
-    _display = display;
-};
 
+ScreenFrame::ScreenFrame():display(display){}
+
+void ScreenFrame::setDisplay(SSD1306 &display){
+        this->display = display;
+}
 
 void ScreenFrame::drawFrame()
 {
-    _display.setTextAlignment(TEXT_ALIGN_LEFT);
-    _display.setFont(ArialMT_Plain_10);
+    this->display.setTextAlignment(TEXT_ALIGN_LEFT);
+    this->display.setFont(ArialMT_Plain_10);
     for (int i = 0; i < _lineCount; i++)
     {
         if (i == _hoveredLine)
         {
-            _display.drawString(0, 10 * i, "*");
+            this->display.drawString(0, 10 * i, "*");
         }
-        _display.drawString(1, 10 * i, _screenLines[i].getColumn1String());
+        this->display.drawString(1, 10 * i, _screenLines[i].getColumn1String());
         if (_selected)
         {
-            _display.drawString(59, 10 * i, "<");
+            this->display.drawString(59, 10 * i, "<");
         }
-        _display.drawString(60, 10 * i, _screenLines[i].getColumn2String());
+        this->display.drawString(60, 10 * i, _screenLines[i].getColumn2String());
         if (_selected)
         {
-            _display.drawString(66, 10 * i, ">");
+            this->display.drawString(66, 10 * i, ">");
         }
     }
 };

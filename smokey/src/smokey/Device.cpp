@@ -1,4 +1,4 @@
-#include "smokey\Device.h"
+#include "Device.h"
 
 Device::Device(String name){
     _name = name;

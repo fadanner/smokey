@@ -15,7 +15,7 @@ protected:
   boolean _selected = false;
 
 public:
-  ScreenFrame(SSD1306 *display);
+  ScreenFrame(SSD1306& display);
 
   void drawFrame();
   void hoverNextLine();

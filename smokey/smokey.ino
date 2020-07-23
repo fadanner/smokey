@@ -13,19 +13,22 @@
 #include "src/smokey/ScreenLine.h"
 
 SSD1306 display (0x3c, 5, 4);
-OLEDDisplayUi ui     ( &display );
+//OLEDDisplayUi ui     ( &display );
 
 
-const char* ssid     = "FaMe_Guest";
+char* ssid     = "FaMe_Guest";
 const char* password = "fame_gast";
 
-const int sensorCount = 1;
+const int sensorCount = 6;
 TempSensor sensors[sensorCount] = {
-  TempSensor("Sensor0",21)
+  TempSensor("Fleisch1",22),
+  TempSensor("Fleisch2",16),
+  TempSensor("Grill1",17),
+  TempSensor("Grill2",0),
+  TempSensor("Grill3",5),
+  TempSensor("Grill4",4)
 };
 
-const byte fanPwmPin = 0;
-const byte fanSwitchPin = 2;
 Fan fan = Fan("Fan",0,2);
 
 const byte buttonLeftPin = 16 ;
@@ -38,21 +41,17 @@ const uint8_t  SPI_CHIP_SELECT  =      21; ///< Chip-Select PIN for SPI
 const uint8_t  SPI_MISO         =   MISO; ///< Master-In, Slave-Out PIN for SPI
 const uint8_t  SPI_SYSTEM_CLOCK =    SCK; ///< System Clock PIN for SPI
 
-ScreenController screenController;
-ScreenFrame sfController;
-ScreenFrame sfTemp;
-ScreenFrame sfAir;
+ScreenController screenController = ScreenController(display, buttonLeftPin, buttonRightPin, buttonUpPin, buttonDownPin, buttonSelectPin);
+ScreenFrame sfController = ScreenFrame();
+ScreenFrame sfTemp  = ScreenFrame();
+ScreenFrame sfAir  = ScreenFrame();
 
-
-
-/////////////////////////////////////////////////////
 
 
 void setup() {
 
   
   Serial.begin(115200);
-  Serial.setDebugOutput(true);
   Serial.print("ESP32 SDK: ");
   Serial.println(ESP.getSdkVersion());
 
@@ -62,17 +61,17 @@ void setup() {
   Serial.println(SCK); //18
   Serial.println(SS); //5
 
-  screenController = ScreenController(display, buttonLeftPin, buttonRightPin, buttonUpPin, buttonDownPin, buttonSelectPin);
-  sfTemp = ScreenFrame(display);
-  sfTemp.setScreenLine(new ScreenLine(sensors[0])
-  screenController.SetFrame(sfTemp;0)
 
-  sfAir = ScreenFrame(display);
-  sfAir.setScreenLine(new ScreenLine(fan)
-  screenController.SetFrame(sfTemp;1)
+  ScreenLine slSensor0 = ScreenLine(sensors[0]);
+  sfTemp.setScreenLine(slSensor0,0);
+  screenController.SetFrame(sfTemp,0);
+  
+  ScreenLine slFan = ScreenLine(fan);
+  sfAir.setScreenLine(slFan,0);
+  screenController.SetFrame(sfTemp,1);
  
   screenController.updateScreen();
-  
+
    WiFi.begin(ssid, password);
    while (WiFi.status() != WL_CONNECTED) {
           delay(500);
@@ -87,13 +86,19 @@ void setup() {
 }
 
 void loop() {
-    if(Serial.available() > 0){
-      byte currentSpeed = (String(Serial.readStringUntil('\n'))).toInt();
-      fan.setSpeed(currentSpeed);
-      Serial.println(currentSpeed);
+   // byte currentSpeed = (String(Serial.readStringUntil('\n'))).toInt();
+    //fan.setValue(currentSpeed);
+    //Serial.println(currentSpeed);
+    Serial.println("##########");
+    for (size_t i = 0; i < sensorCount; i++)
+    {
+      String data;
+      data = sensors[i].getString();
+      Serial.println(data);
     }
-  screenController.watchButtonPress();
-  screenController.updateScreen();
-  delay(10);
+
+  //screenController.watchButtonPress();
+  //screenController.updateScreen();
+  delay(500);
 
 }

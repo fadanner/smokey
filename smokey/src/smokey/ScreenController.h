@@ -9,7 +9,7 @@
 class ScreenController
 {
 private:
-  SSD1306  _display;
+  SSD1306 _display;
   static const int _frameCount = 3;
   byte _currentFrame = 0;
   ScreenFrame _screenFrames [_frameCount];
@@ -21,7 +21,7 @@ private:
   boolean _lineSelected = false;
 
 public:
-  ScreenController(SSD1306 display, byte pinButtonLeft, byte pinButtonRight, byte pinButtonUp, byte pinButtonDown, byte pinButtonSelect);
+  ScreenController(SSD1306& display, byte pinButtonLeft, byte pinButtonRight, byte pinButtonUp, byte pinButtonDown, byte pinButtonSelect);
 
   void init();
 

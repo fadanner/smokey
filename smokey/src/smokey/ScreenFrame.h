@@ -8,15 +8,16 @@
 class ScreenFrame
 {
 protected:
-  SSD1306 _display;
+  SSD1306 &display;
   byte _lineCount = 6;
   ScreenLine _screenLines[6];
   byte _hoveredLine = 0;
   boolean _selected = false;
 
 public:
-  ScreenFrame(SSD1306 *display);
+  ScreenFrame();
 
+  void setDisplay(SSD1306 &display);
   void drawFrame();
   void hoverNextLine();
   void hoverPreviousLine();

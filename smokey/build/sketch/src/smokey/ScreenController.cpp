@@ -1,6 +1,6 @@
 #include "ScreenController.h"
 
-ScreenController::ScreenController(OLEDDisplay *display, byte pinButtonLeft, byte pinButtonRight, byte pinButtonUp, byte pinButtonDown, byte pinButtonSelect)
+ScreenController::ScreenController(SSD1306& display, byte pinButtonLeft, byte pinButtonRight, byte pinButtonUp, byte pinButtonDown, byte pinButtonSelect)
 {
     _display = display;
     _buttonLeft = Button(pinButtonLeft);
@@ -12,7 +12,7 @@ ScreenController::ScreenController(OLEDDisplay *display, byte pinButtonLeft, byt
 };
 
 void ScreenController::init(){
-    _display.clear()
+    _display.clear();
 
 };
 

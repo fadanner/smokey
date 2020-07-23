@@ -1,4 +1,5 @@
 #include "TempSensor.h"
+#include <MAX31855.h>
 
 TempSensor::TempSensor(char *name, byte pin) : Device(name)
 {
@@ -8,27 +9,33 @@ TempSensor::TempSensor(char *name, byte pin) : Device(name)
 
 void TempSensor::init()
 {
-    while (!MAX31855.begin(_pin))
+    while (!Sensor.begin(_pin))
         ;
 }
 
 int TempSensor::getProbeTemperature()
 {
-    _probeTemp = MAX31855.readProbe(); // retrieve thermocouple probe temp
-    uint8_t faultCode = MAX31855.fault();
+    _probeTemp = Sensor.readProbe() / 1000; // retrieve thermocouple probe temp
     return _probeTemp;
 }
 
 int TempSensor::getAmbientTemperature()
 {
-    _ambientTemp = MAX31855.readAmbient(); // retrieve MAX31855 die ambient temperature
+    _ambientTemp = Sensor.readAmbient() / 1000; // retrieve MAX31855 die ambient temperature
     return _ambientTemp;
 }
 
 byte TempSensor::getFault()
 {
-    _fault = MAX31855.fault(); // retrieve MAX31855 die ambient temperature
+    _fault = Sensor.fault(); // retrieve MAX31855 die ambient temperature
     return _fault;
+}
+
+String TempSensor::getString()
+{
+    char data[100];
+    sprintf(data,"%s : int: %i, ext: %i, fault:%i",this->getName(),this->getAmbientTemperature(),this->getProbeTemperature(),this->getFault());
+    return data;
 }
 
 int TempSensor::getValue(){

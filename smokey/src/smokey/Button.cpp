@@ -5,6 +5,10 @@ Button::Button(byte pin) {
   lastReading = HIGH;
   init();
 }
+
+Button::Button() {
+}
+
 void Button::init() {
   pinMode(pin, INPUT_PULLUP);
   update();

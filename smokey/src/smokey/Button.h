@@ -13,6 +13,7 @@ class Button {
     
   public:
     Button(byte pin);
+    Button();
     void init();
     void update();
     byte getState();

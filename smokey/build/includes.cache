@@ -2,22 +2,22 @@
   {
     "Sourcefile": null,
     "Include": "",
-    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\cores\\esp8266"
+    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\cores\\esp32"
   },
   {
     "Sourcefile": null,
     "Include": "",
-    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\variants\\adafruit"
+    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\variants\\lolin32"
   },
   {
     "Sourcefile": "e:\\code\\smokey\\smokey\\build\\sketch\\smokey.ino.cpp",
     "Include": "Wire.h",
-    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\libraries\\Wire"
+    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\Wire\\src"
   },
   {
     "Sourcefile": "e:\\code\\smokey\\smokey\\build\\sketch\\smokey.ino.cpp",
     "Include": "WiFi.h",
-    "Includepath": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src"
+    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src"
   },
   {
     "Sourcefile": "e:\\code\\smokey\\smokey\\build\\sketch\\smokey.ino.cpp",
@@ -27,7 +27,7 @@
   {
     "Sourcefile": "e:\\code\\smokey\\smokey\\build\\sketch\\smokey.ino.cpp",
     "Include": "SPI.h",
-    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\libraries\\SPI"
+    "Includepath": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\SPI\\src"
   },
   {
     "Sourcefile": "e:\\code\\smokey\\smokey\\build\\sketch\\smokey.ino.cpp",
@@ -80,42 +80,57 @@
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\libraries\\Wire\\Wire.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\Wire\\src\\Wire.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\WiFi.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\ETH.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\WiFiClient.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFi.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\WiFiServer.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiAP.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\WiFiUdp.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiClient.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\utility\\server_drv.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiGeneric.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\utility\\spi_drv.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiMulti.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src\\utility\\wifi_drv.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiSTA.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiScan.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\WiFi\\src\\WiFiUdp.cpp",
     "Include": "",
     "Includepath": null
   },
@@ -125,7 +140,7 @@
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\libraries\\SPI\\SPI.cpp",
+    "Sourcefile": "C:\\Users\\fadanner\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.4\\libraries\\SPI\\src\\SPI.cpp",
     "Include": "",
     "Includepath": null
   }
